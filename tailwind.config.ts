@@ -18,7 +18,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["Open Sans"],
+        sans: ["Open Sans", "Arial", "-apple-system", "system-ui", "sans-serif"],
       },
       gridTemplateColumns: {
         wrapper: "repeat(auto-fill,minmax(10rem,1fr))",
