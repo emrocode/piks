@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply min-h-screen bg-gradient-to-r from-piks-200 via-piks-100 to-piks-200 text-piks-500;
+  }
+}
+
+@layer utilities {
+  .box {
+    @apply max-w-[70rem] mx-auto w-[90%];
+  }
+
+  .piksToast {
+    @apply ring-1 ring-piks-500/25 rounded-md flex items-center gap-x-1 p-4 bg-piks-200;
+  }
+}
