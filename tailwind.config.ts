@@ -18,7 +18,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["Noto Sans"],
+        sans: ["Open Sans"],
       },
       gridTemplateColumns: {
         wrapper: "repeat(auto-fill,minmax(10rem,1fr))",
