@@ -23,7 +23,7 @@ const PiksUpload: React.FC<PiksUploadProps> = ({
           value={inputValue}
           onChange={handleInputChange}
           placeholder="Ingresa el ID público de la imagen"
-          className="px-3 py-2 w-full ring-1 ring-piks-500/25 rounded text-sm bg-transparent placeholder:text-ring-500/60"
+          className="px-3 py-2 w-full ring-1 ring-piks-500/25 rounded text-sm bg-transparent placeholder:text-piks-500/50"
         />
         <button
           onClick={handleUpload}

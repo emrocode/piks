@@ -14,9 +14,14 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <main className="grid min-h-screen grid-cols-1 gap-4 grid-rows-[auto_1fr_auto]">
+    <main
+      className={clsx(
+        "grid min-h-screen grid-cols-1 gap-4 grid-rows-[auto_1fr_auto]",
+        open_sans.className,
+      )}
+    >
       <Header />
-      <div className={clsx("box", open_sans.className)}>{children}</div>
+      <div className="box">{children}</div>
       <Footer />
     </main>
   );
