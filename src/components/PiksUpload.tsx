@@ -50,7 +50,7 @@ const PiksUpload: React.FC<PiksUploadProps> = ({
             className="py-2 max-w-max px-4 rounded-full ring-1 flex items-center gap-x-1 bg-piks-200 ring-piks-500/25"
           >
             <PlusIcon className="size-4" />
-            <span className="text-sm hidden sm:block">Subir imagen</span>
+            <span className="text-sm">Subir imagen</span>
           </button>
         )}
       </CldUploadWidget>
