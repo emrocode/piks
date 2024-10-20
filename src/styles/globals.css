@@ -11,10 +11,10 @@
 
 @layer utilities {
   .box {
-    @apply max-w-[70rem] mx-auto w-[90%];
+    @apply mx-auto w-[90%] max-w-[70rem];
   }
 
   .piksToast {
-    @apply ring-1 ring-piks-500/25 rounded-md flex items-center gap-x-1 p-4 bg-piks-200;
+    @apply flex items-center gap-x-1 rounded-md bg-piks-200 p-4 ring-1 ring-piks-500/25;
   }
 }

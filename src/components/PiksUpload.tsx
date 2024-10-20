@@ -16,23 +16,23 @@ const PiksUpload: React.FC<PiksUploadProps> = ({
   handleUpload,
 }) => {
   return (
-    <div className="max-w-sm w-full">
+    <div className="w-full max-w-sm">
       <div className="flex gap-x-2">
         <input
           type="text"
           value={inputValue}
           onChange={handleInputChange}
           placeholder="Ingresa el ID público de la imagen"
-          className="px-3 py-2 w-full ring-1 ring-piks-500/25 rounded text-sm bg-transparent placeholder:text-piks-500/50"
+          className="w-full rounded bg-transparent px-3 py-2 text-sm ring-1 ring-piks-500/25 placeholder:text-piks-500/50"
         />
         <button
           onClick={handleUpload}
-          className="bg-piks-200 ring-1 rounded ring-piks-500/25 p-2"
+          className="rounded bg-piks-200 p-2 ring-1 ring-piks-500/25"
         >
           <ArrowUpIcon className="w-4" />
         </button>
       </div>
-      <span className="flex items-center my-2 before:h-px before:bg-piks-500/25 before:flex-grow before:mr-4 after:h-px after:bg-piks-500/25 after:flex-grow after:ml-4">
+      <span className="my-2 flex items-center before:mr-4 before:h-px before:flex-grow before:bg-piks-500/25 after:ml-4 after:h-px after:flex-grow after:bg-piks-500/25">
         o
       </span>
       <CldUploadWidget
@@ -47,7 +47,7 @@ const PiksUpload: React.FC<PiksUploadProps> = ({
           <button
             type="button"
             onClick={() => open()}
-            className="py-2 max-w-max px-4 rounded-full ring-1 flex items-center gap-x-1 bg-piks-200 ring-piks-500/25"
+            className="flex max-w-max items-center gap-x-1 rounded-full bg-piks-200 px-4 py-2 ring-1 ring-piks-500/25"
           >
             <PlusIcon className="size-4" />
             <span className="text-sm">Subir imagen</span>

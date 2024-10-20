@@ -12,24 +12,26 @@ const Header = () => {
       key: "GitHub",
       path: "https://github.com/emrocode/piks",
       icon: ArrowUpRightIcon,
+      isExternal: true,
     },
   ];
 
   return (
     <header>
-      <nav className="h-16 flex items-center justify-between box">
-        <Link href="/" className="font-bold text-xl uppercase">
+      <nav className="box flex h-16 items-center justify-between">
+        <Link href="/" className="text-xl font-bold uppercase">
           piks 🎃
         </Link>
-        <ul className="flex items-center gap-x-2">
+        <ul className="flex items-center gap-x-1">
           {navItems.map((item) => (
-            <li
-              key={item.key}
-              className="last:bg-piks-200 last:rounded-full last:ring-1 last:ring-piks-500/25"
-            >
+            <li key={item.key}>
               <Link
                 href={item.path}
-                className="px-4 py-2 flex items-center gap-x-1 text-sm "
+                className="flex items-center gap-x-1 px-4 py-2 text-sm font-medium [&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:ease-in-out [&>svg]:hover:-translate-y-0.5 [&>svg]:hover:translate-x-0.5"
+                {...(item.isExternal && {
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                })}
               >
                 <span>{item.key}</span>
                 {item.icon && <item.icon className="w-4" aria-hidden="true" />}

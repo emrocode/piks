@@ -10,7 +10,7 @@ export default function Galeria() {
   if (error) return;
   if (isLoading) return <span>Cargando...</span>;
   if (images?.length === 0)
-    return <span>No existen imagenes para mostrar</span>;
+    return <span>No existen imágenes para mostrar</span>;
 
   const removeAsset = async (publicId: string) => {
     try {
@@ -44,9 +44,9 @@ export default function Galeria() {
         {filteredImages?.map((img: CloudinaryUploadWidgetInfo) => (
           <article
             key={img.asset_id}
-            className="relative bg-piks-100 shadow-sm p-4 ring-1 rounded-md ring-piks-500/25"
+            className="relative rounded-md bg-piks-100 p-4 shadow-sm ring-1 ring-piks-500/25"
           >
-            <figure className="h-36 rounded overflow-hidden">
+            <figure className="h-36 overflow-hidden rounded">
               <Image
                 src={img.secure_url}
                 width={144}
@@ -56,11 +56,11 @@ export default function Galeria() {
               />
             </figure>
             <div className="mt-4">
-              <h3 className="max-w-36 text-xs break-words">{img.public_id}</h3>
+              <h3 className="max-w-36 break-words text-xs">{img.public_id}</h3>
               <button
                 type="button"
                 onClick={() => removeAsset(img.public_id)}
-                className="absolute -top-2 -right-2 bg-piks-100 ring-1 ring-piks-500/25 size-8 rounded-full grid place-content-center shadow-sm"
+                className="absolute -right-2 -top-2 grid size-8 place-content-center rounded-full bg-piks-100 shadow-sm ring-1 ring-piks-500/25 transition-transform duration-150 ease-in-out hover:scale-110"
               >
                 <XMarkIcon className="size-5" />
               </button>
