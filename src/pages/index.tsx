@@ -78,7 +78,10 @@ const Home: React.FC = () => {
                 width={360}
                 height={360}
                 alt=""
-                onLoad={(e) => setImageUrl(e.target.currentSrc)}
+                onLoad={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  setImageUrl(target.currentSrc);
+                }}
                 {...(finalPrompts && {
                   transformations: `/c_limit,w_360/e_gen_background_replace:${finalPrompts}`,
                 })}
