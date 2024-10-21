@@ -37,9 +37,13 @@ const PiksUpload: React.FC<PiksUploadProps> = ({
       </span>
       <CldUploadWidget
         uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
-        options={{ sources: ["local", "url"], multiple: false, maxFiles: 1 }}
-        // @ts-expect-error: Property "public_id" does not exist
-        // on type "string|CloudinaryUploadWidgetInfo"
+        options={{
+          sources: ["local", "url"],
+          multiple: false,
+          maxFiles: 1,
+        }}
+        // @ts-expect-error: Property public_id does not exist
+        // on type CloudinaryUploadWidgetInfo
         onSuccess={(result) => setPublicId(result?.info?.public_id)}
         onQueuesEnd={(_, { widget }) => widget.close()}
       >
