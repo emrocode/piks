@@ -2,7 +2,7 @@
 
 ## Piks
 
-Piks utilizes Cloudinary's AI image generation to create spooky and atmospheric backgrounds
+🎃 Piks uses Cloudinary's AI image generation to create spooky and atmospheric backgrounds
 
 ### Built with:
 
@@ -25,7 +25,7 @@ npm install
 
 3. Add .env file
 
-```bash
+```env
 # All enviroment variables you need
 # Obtain from https://cloudinary.com
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="YOUR_CLOUD_NAME_HERE"
