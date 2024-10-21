@@ -41,6 +41,6 @@ CLOUDINARY_IMAGES_DIRECTORY="DIRECTORY_OR_FOLDER"
 npm run dev
 ```
 
-[Preview]: https://github.com/user-attachments/assets/1c73e236-51e8-4172-897b-3d339adf9cc5
+[Preview]: https://github.com/user-attachments/assets/195ee7c6-09ec-4b5c-964f-62a5947ec377
 [Nextjs]: https://nextjs.org
 [Tailwindcss]: https://tailwindcss.com/
