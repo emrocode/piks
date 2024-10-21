@@ -1,6 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import Image from "next/image";
-import { getCldImageUrl } from "next-cloudinary";
+import { CldImage } from "next-cloudinary";
 import { PiksCommand, PiksUpload } from "@/components";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 
@@ -9,6 +8,7 @@ const Home: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [selectedPrompts, setSelectedPrompts] = useState<string[]>([]);
   const [finalPrompts, setFinalPrompts] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value.trim());
@@ -36,11 +36,7 @@ const Home: React.FC = () => {
   // Une todos los prompts seleccionados
   const generateImage = () => setFinalPrompts(selectedPrompts.join(" "));
 
-  const imageUrl = getCldImageUrl({
-    src: publicId,
-    replaceBackground: finalPrompts,
-  });
-
+  // Descargar imagen generada
   const handleDownloadImage = async (imageUrl: string) => {
     try {
       const response = await fetch(imageUrl);
@@ -73,16 +69,20 @@ const Home: React.FC = () => {
 
   return (
     <div className="grid size-full place-items-center">
-      {imageUrl ? (
+      {publicId ? (
         <div className="grid-cols-auto grid size-full gap-8 md:grid-cols-[1fr_32rem]">
           <div className="grid w-full place-content-center">
             <div className="relative">
-              <Image
-                src={imageUrl}
-                width={300}
-                height={300}
+              <CldImage
+                src={publicId}
+                width={360}
+                height={360}
                 alt=""
-                className="block size-full object-cover object-center"
+                onLoad={(e) => setImageUrl(e.target.currentSrc)}
+                {...(finalPrompts && {
+                  transformations: `/c_limit,w_360/e_gen_background_replace:${finalPrompts}`,
+                })}
+                className="block size-full max-w-[360px] object-cover object-center"
               />
               <button
                 type="button"
