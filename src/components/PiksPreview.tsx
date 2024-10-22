@@ -19,7 +19,7 @@ const PiksPreview: React.FC = () => {
   const url = getCldImageUrl({
     src: publicId,
     transformations:
-      finalPrompts && `/c_limit,w_384/e_gen_background_replace:${finalPrompts}`,
+      finalPrompts && `/c_limit,w_750/e_gen_background_replace:${finalPrompts}`,
   });
 
   return (
@@ -43,7 +43,7 @@ const PiksPreview: React.FC = () => {
               },
             )}
           />
-          {imageUrl && (
+          {!isLoading && (
             <button
               type="button"
               onClick={() => handleDownloadImage(imageUrl)}

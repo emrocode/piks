@@ -24,6 +24,8 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
   const [publicId, setPublicId] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [selectedPrompts, setSelectedPrompts] = useState<string[]>([]);
+  const [prevSelectedPrompts, setPrevSelectedPrompts] =
+    useState(selectedPrompts);
   const [finalPrompts, setFinalPrompts] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -53,11 +55,13 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Generar imagen uniendo todos los prompts seleccionados
   const generateImage = () => {
-    setFinalPrompts(selectedPrompts.join(" "));
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 800);
+    if (
+      JSON.stringify(selectedPrompts) !== JSON.stringify(prevSelectedPrompts)
+    ) {
+      setFinalPrompts(selectedPrompts.join(" "));
+      setIsLoading(true);
+      setPrevSelectedPrompts(selectedPrompts);
+    }
   };
 
   // Descargar imagen generada

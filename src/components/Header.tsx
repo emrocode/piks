@@ -27,7 +27,7 @@ const Header = () => {
             <li key={item.key}>
               <Link
                 href={item.path}
-                className="flex items-center gap-x-1 px-4 py-2 text-sm font-medium [&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:ease-in-out [&>svg]:hover:-translate-y-0.5 [&>svg]:hover:translate-x-0.5"
+                className="flex items-center gap-x-1 px-3 py-1.5 text-sm font-medium [&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:ease-in-out [&>svg]:hover:-translate-y-0.5 [&>svg]:hover:translate-x-0.5"
                 {...(item.isExternal && {
                   target: "_blank",
                   rel: "noopener noreferrer",
