@@ -11,7 +11,7 @@ type PromptItem = {
 };
 
 const PiksCommand: React.FC = () => {
-  const { selectedPrompts, isLoading, togglePrompt, generateImage } = usePiks();
+  const { newPrompts, isLoading, togglePrompt, generateImage } = usePiks();
 
   return (
     <div className="grid place-content-center place-items-start gap-6">
@@ -23,7 +23,7 @@ const PiksCommand: React.FC = () => {
             onClick={() => togglePrompt(item.prompt)}
             className={clsx(
               "block w-full cursor-pointer rounded bg-piks-100 p-2 ring-1 ring-piks-500/25",
-              selectedPrompts.includes(item.prompt) &&
+              newPrompts.includes(item.prompt) &&
                 "bg-piks-300/50 !ring-piks-500",
             )}
           >

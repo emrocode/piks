@@ -1,5 +1,4 @@
 import { usePiks } from "@/contexts";
-import { getCldImageUrl } from "next-cloudinary";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Image from "next/image";
@@ -7,27 +6,19 @@ import PiksCommand from "./PiksCommand";
 
 const PiksPreview: React.FC = () => {
   const {
-    publicId,
     imageUrl,
     isLoading,
-    finalPrompts,
     setIsLoading,
     setImageUrl,
     handleDownloadImage,
   } = usePiks();
-
-  const url = getCldImageUrl({
-    src: publicId,
-    transformations:
-      finalPrompts && `/c_limit,w_750/e_gen_background_replace:${finalPrompts}`,
-  });
 
   return (
     <div className="grid-cols-auto grid size-full gap-8 md:grid-cols-[1fr_32rem]">
       <div className="grid w-full place-content-center">
         <div className="relative">
           <Image
-            src={url}
+            src={imageUrl}
             width={360}
             height={360}
             alt=""

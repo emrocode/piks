@@ -1,10 +1,11 @@
 import { createContext, useContext, useState } from "react";
+import { getCldImageUrl } from "next-cloudinary";
 import useSWR from "swr";
 
 type PiksContextType = {
   publicId: string;
   inputValue: string;
-  selectedPrompts: string[];
+  newPrompts: string[];
   finalPrompts: string;
   imageUrl: string;
   isLoading: boolean;
@@ -23,9 +24,8 @@ const PiksContext = createContext<PiksContextType | undefined>(undefined);
 export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
   const [publicId, setPublicId] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
-  const [selectedPrompts, setSelectedPrompts] = useState<string[]>([]);
-  const [prevSelectedPrompts, setPrevSelectedPrompts] =
-    useState(selectedPrompts);
+  const [newPrompts, setNewPrompts] = useState<string[]>([]);
+  const [prevPrompts, setPrevPrompts] = useState(newPrompts);
   const [finalPrompts, setFinalPrompts] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -41,7 +41,7 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Selecciona máximo 3 prompts para reemplazar el background
   const togglePrompt = (prompt: string) => {
-    setSelectedPrompts((prev) =>
+    setNewPrompts((prev) =>
       // Elimina los prompts que ya existen en el array
       prev.includes(prompt)
         ? prev.filter((p) => p !== prompt)
@@ -55,12 +55,10 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Generar imagen uniendo todos los prompts seleccionados
   const generateImage = () => {
-    if (
-      JSON.stringify(selectedPrompts) !== JSON.stringify(prevSelectedPrompts)
-    ) {
-      setFinalPrompts(selectedPrompts.join(" "));
+    if (JSON.stringify(newPrompts) !== JSON.stringify(prevPrompts)) {
+      setFinalPrompts(newPrompts.join(" "));
       setIsLoading(true);
-      setPrevSelectedPrompts(selectedPrompts);
+      setPrevPrompts(newPrompts);
     }
   };
 
@@ -85,28 +83,35 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
   const fetcher = (url: string) =>
     fetch(url).then((res) => {
       if (res.status === 423) {
-        throw new Error("Pending");
+        throw new Error("Locked");
       }
       return res.json();
     });
 
   const {} = useSWR(imageUrl, fetcher, {
     onError: (err) => {
-      if (err.message === "Pending") {
+      if (err.message === "Locked") {
         setIsLoading(true);
       }
     },
     onSuccess: () => {
       setIsLoading(false);
     },
+    refreshInterval: 3000,
+  });
+
+  const url = getCldImageUrl({
+    src: publicId,
+    transformations:
+      finalPrompts && `/c_limit,w_750/e_gen_background_replace:${finalPrompts}`,
   });
 
   const value = {
     publicId,
     inputValue,
-    selectedPrompts,
+    newPrompts,
     finalPrompts,
-    imageUrl,
+    imageUrl: url,
     isLoading,
     handleInputChange,
     handleUpload,
