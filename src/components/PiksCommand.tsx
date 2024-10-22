@@ -1,6 +1,8 @@
 import { prompts } from "@/data";
+import { usePiks } from "@/contexts";
 import Image from "next/image";
 import clsx from "clsx";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 type PromptItem = {
   key: string;
@@ -8,17 +10,9 @@ type PromptItem = {
   emojiPath: string;
 };
 
-type PiksCommandProps = {
-  selectedPrompts: string[];
-  togglePrompt: (prompt: string) => void;
-  generateImage: () => void;
-};
+const PiksCommand: React.FC = () => {
+  const { selectedPrompts, isLoading, togglePrompt, generateImage } = usePiks();
 
-const PiksCommand: React.FC<PiksCommandProps> = ({
-  selectedPrompts,
-  togglePrompt,
-  generateImage,
-}) => {
   return (
     <div className="grid place-content-center place-items-start gap-6">
       <ul className="mx-auto grid max-w-[300px] grid-cols-emojis gap-2">
@@ -46,9 +40,10 @@ const PiksCommand: React.FC<PiksCommandProps> = ({
       </ul>
       <button
         onClick={generateImage}
-        className="w-full rounded bg-piks-300/50 px-4 py-2 ring-1 ring-piks-500"
+        className="flex w-full items-center justify-center gap-x-2 rounded bg-piks-300/50 px-4 py-2 ring-1 ring-piks-500"
       >
-        Generar imagen
+        {isLoading && <ArrowPathIcon className="w-4 animate-spin" />}
+        <span>Generar imagen</span>
       </button>
     </div>
   );

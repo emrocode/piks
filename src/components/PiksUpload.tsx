@@ -1,20 +1,10 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { usePiks } from "@/contexts";
 import { CldUploadWidget } from "next-cloudinary";
 import { ArrowUpIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-type PiksUploadProps = {
-  inputValue: string;
-  setPublicId: Dispatch<SetStateAction<string>>;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleUpload: () => void;
-};
+const PiksUpload: React.FC = () => {
+  const { inputValue, handleInputChange, handleUpload } = usePiks();
 
-const PiksUpload: React.FC<PiksUploadProps> = ({
-  inputValue,
-  setPublicId,
-  handleInputChange,
-  handleUpload,
-}) => {
   return (
     <div className="w-full max-w-sm">
       <div className="flex gap-x-2">
