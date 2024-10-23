@@ -26,7 +26,7 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
   const [newPrompts, setNewPrompts] = useState<string[]>([]);
   const [prevPrompts, setPrevPrompts] = useState(newPrompts);
   const [finalPrompts, setFinalPrompts] = useState<string>("");
-  const [imageUrl, setImageUrl] = useState<string>("");
+  const [, setImageUrl] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
