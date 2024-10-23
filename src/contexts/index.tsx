@@ -90,6 +90,7 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
 
   const {} = useSWR(imageUrl, fetcher, {
     onError: (err) => {
+      // Esto funciona bien en local xd
       if (err.message === "Locked") {
         setIsLoading(true);
       }
@@ -97,7 +98,6 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
     onSuccess: () => {
       setIsLoading(false);
     },
-    refreshInterval: 3000,
   });
 
   const url = getCldImageUrl({
