@@ -5,13 +5,7 @@ import Image from "next/image";
 import PiksCommand from "./PiksCommand";
 
 const PiksPreview: React.FC = () => {
-  const {
-    imageUrl,
-    isLoading,
-    setIsLoading,
-    setImageUrl,
-    handleDownloadImage,
-  } = usePiks();
+  const { imageUrl, isLoading, setIsLoading, handleDownloadImage } = usePiks();
 
   return (
     <div className="grid-cols-auto grid size-full gap-8 md:grid-cols-[1fr_32rem]">
@@ -22,11 +16,7 @@ const PiksPreview: React.FC = () => {
             width={360}
             height={360}
             alt=""
-            onLoad={(e) => {
-              const target = e.target as HTMLImageElement;
-              setIsLoading(false);
-              setImageUrl(target.currentSrc);
-            }}
+            onLoadingComplete={() => setIsLoading(false)}
             className={clsx(
               "block size-full max-w-[360px] object-cover object-center",
               {

@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
 import { getCldImageUrl } from "next-cloudinary";
-import useSWR from "swr";
 
 type PiksContextType = {
   publicId: string;
@@ -57,8 +56,8 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
   const generateImage = () => {
     if (JSON.stringify(newPrompts) !== JSON.stringify(prevPrompts)) {
       setFinalPrompts(newPrompts.join(" "));
-      setIsLoading(true);
       setPrevPrompts(newPrompts);
+      setIsLoading(true);
     }
   };
 
@@ -80,27 +79,7 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const fetcher = (url: string) =>
-    fetch(url).then((res) => {
-      if (res.status === 423) {
-        throw new Error("Locked");
-      }
-      return res.json();
-    });
-
-  const {} = useSWR(imageUrl, fetcher, {
-    onError: (err) => {
-      // Esto funciona bien en local xd
-      if (err.message === "Locked") {
-        setIsLoading(true);
-      }
-    },
-    onSuccess: () => {
-      setIsLoading(false);
-    },
-  });
-
-  const url = getCldImageUrl({
+  const imageFromCld = getCldImageUrl({
     src: publicId,
     transformations:
       finalPrompts && `/c_limit,w_750/e_gen_background_replace:${finalPrompts}`,
@@ -111,7 +90,7 @@ export const PiksProvider = ({ children }: { children: React.ReactNode }) => {
     inputValue,
     newPrompts,
     finalPrompts,
-    imageUrl: url,
+    imageUrl: imageFromCld,
     isLoading,
     handleInputChange,
     handleUpload,
